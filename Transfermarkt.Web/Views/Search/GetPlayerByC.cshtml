@@ -1,0 +1,43 @@
+﻿@model List<Transfermarkt.Web.ViewModels.PlayerCriteriaVM>
+@{
+    ViewData["Title"] = "GetPlayerByC";
+}
+@if (!Model.Any())
+{
+    <h1>There is not player with your criteria, enter one more time.</h1>
+    <a class="btn btn-danger mt-4" href="/Search/SearchPlayerByC">Enter criteria</a>
+}
+else
+{
+    <h1>Players with your criteria</h1>
+    <table class="table table-bordered">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Middle name</th>
+            <th>Height</th>
+            <th>Birth place</th>
+            <th>Birth date</th>
+            <th>Jersey</th>
+            <th>Stronger foot</th>
+            <th>Value</th>
+            <th>Weight</th>
+        </tr>
+        @foreach (var x in Model)
+        {
+        <tr>
+            <th>@x.FirstName</th>
+            <th>@x.LastName</th>
+            <th>@x.MiddleName</th>
+            <th>@x.Height</th>
+            <th>@x.Birthplace</th>
+            <th>@x.Birthdate.ToShortDateString()</th>
+            <th>@x.Jersey</th>
+            <th>@x.StrongerFoot</th>
+            <th>@x.Value</th>
+            <th>@x.Weight</th>
+        </tr>
+        }
+    </table>
+    <a class="btn btn-danger mt-4" href="/Search/SearchPlayerByC">Enter criteria</a>
+}

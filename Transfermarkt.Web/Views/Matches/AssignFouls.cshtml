@@ -1,0 +1,52 @@
+﻿@model Transfermarkt.Web.ViewModels.FoulInputVM
+@{
+    ViewData["Title"] = "AssignFouls";
+    var message = ViewBag.Mistake;
+}
+
+<h1>AssignFouls</h1>
+<h4>PlayerFouls</h4>
+@if (message != null)
+{
+    <h1 style="color:red">@message</h1>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AssignFouls">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label asp-for="PlayerId" class="control-label">Player</label>
+                <select asp-for="PlayerId" asp-items="Model.Players" style="width:auto"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="VictimId" class="control-label">Victim</label>
+                <select asp-for="VictimId" asp-items="Model.Victims" style="width:auto"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Minute" class="control-label"></label>
+                <input asp-for="Minute" class="control-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Penalty" class="control-label"></label>
+                <input asp-for="Penalty" class="control-label" type="checkbox" />
+            </div>
+            <div>
+                <input asp-for="MatchId" type="hidden" />
+            </div>
+            <div>
+                <input asp-for="LeagueId" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(() => {
+            $('.multilist').select2();
+            console.log("Test");
+        });
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿@model Transfermarkt.Web.ViewModels.CornerInputVM
+@{
+    ViewData["Title"] = "AssignCorners";
+    var message = ViewBag.Mistake;
+}
+<h1>AssignCorners</h1>
+<h4>PlayerCorner</h4>
+@if (message != null)
+{
+    <h1 style="color:red">@message</h1>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AssignCorners">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label asp-for="MinuteAwarded" class="control-label">Minute awarded</label>
+                <input asp-for="MinuteAwarded" class="control-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TakerId" class="control-label">Taker</label>
+                <select asp-for="TakerId" asp-items="Model.Players" style="width:auto"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="HalfTime" class="control-label"></label>
+                <select asp-for="HalfTime" class="control-label" style="width:auto" asp-items="Model.HalfTimes"></select>
+            </div>
+            <div>
+                <input asp-for="MatchId" type="hidden" />
+            </div>
+            <div>
+                <input asp-for="LeagueId" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

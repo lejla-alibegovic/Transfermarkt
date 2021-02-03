@@ -1,0 +1,35 @@
+﻿@model List<Transfermarkt.Web.ViewModels.SearchForTrainerVM>
+@{
+    ViewData["Title"] = "FindTrainer";
+}
+
+@if (!Model.Any())
+{
+    <h1>We could not find trainer with that enter parametar.</h1>
+    <a href="/Search/SearchTrainer" class="btn btn-primary mt-5">Enter one more time</a>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Middle name</th>
+            <th>Birth date</th>
+            <th>Club name</th>
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <th>@x.FirstName</th>
+                <th>@x.LastName</th>
+                <th>@x.MiddleName</th>
+                <th>@x.BirthDate</th>
+                <th>@x.ClubName</th>
+            </tr>
+        }
+    </table>
+}
+<a href="/Search/AddNewCoach" class="btn btn-primary mt-5">Add coach</a>
+<a href="/Search/AddNewClub" class="btn btn-primary mt-5">Add club</a>
+<a href="/Search/AddNewCoachClub" class="btn btn-primary mt-5">Add coach/club</a>

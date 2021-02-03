@@ -1,0 +1,46 @@
+﻿@model Transfermarkt.Web.ViewModels.RefereeMatchInputVM
+@{
+    ViewData["Title"] = "AssignReferee";
+}
+
+<h1>AssignReferee</h1>
+<h4>RefereeMatch</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AssignReferee">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TimePlayed" class="control-label">Minute awarded</label>
+                <input asp-for="TimePlayed" class="control-label" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="RefereeId" class="control-label">Referees</label>
+                <select class="multilist" asp-items="Model.Referees" name="Ids[]" multiple="multiple"></select>
+            </div>
+            <div>
+                <input asp-for="MatchId" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<style>
+    select {
+        width: 400px;
+    }
+</style>
+@section Scripts{
+    <script>
+        $(document).ready(() => {
+            $('.multilist').select2();
+            console.log("Test");
+        });
+    </script>
+}

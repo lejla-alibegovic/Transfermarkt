@@ -1,0 +1,39 @@
+﻿@model Transfermarkt.Web.ViewModels.AddNewClubVM
+@{
+    ViewData["Title"] = "AddNewClub";
+}
+
+<h1>Add new club</h1>
+
+<form action="/Search/SaveNewClub">
+    Enter name:
+    <input type="text" class="form-control" name="name" />
+    Enter abbreviation:
+    <input type="text" class="form-control" name="abbreviation" />
+    Enter nickname:
+    <input type="text" class="form-control" name="nickname" />
+    Enter founded:
+    <input type="date" class="form-control" name="founded" />
+    Enter logo:
+    <input type="text" class="form-control" name="logo" />
+    Enter market value:
+    <input type="number" class="form-control" name="marketvalue" />
+    Enter city:
+    <select class="form-control" name="cityid">
+        @foreach (var x in Model.Citys)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    Enter league:
+    <select class="form-control" name="leagueid">
+        @foreach (var x in Model.League)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-success mt-5">Save club</button>
+</form>
+
+
+    

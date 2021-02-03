@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "AddNewCoach";
+}
+
+<h1>Add new coach</h1>
+
+<form action="/Search/SaveNewCoach">
+    First name:
+    <input type="text" class="form-control" name="firstname"/>
+    Last name:
+    <input type="text" class="form-control" name="lastname"/>
+    Middle name:
+    <input type="text" class="form-control" name="middlename"/>
+    Birth date:
+    <input type="date" class="form-control"name="birthdate" />
+    <button type="submit" class="btn btn-success mt-5">Submit</button>
+</form>

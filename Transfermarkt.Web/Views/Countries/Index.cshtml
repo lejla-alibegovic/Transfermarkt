@@ -1,0 +1,62 @@
+﻿@using Transfermarkt.Web.Models;
+@using X.PagedList;
+@using X.PagedList.Mvc;
+
+@model IPagedList<Country>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of countries</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@if (!Model.Any())
+{
+    <h3>We don't have countries in our database</h3>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Code
+                </th>
+                <th>
+                    Confederation
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Index" asp-controller="Leagues" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Confederation)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+@X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Countries/Index?page={page}")
+}
+
+<style>
+    .pagination li{
+        height: 20px;
+        width:20px;
+        font-size:30px;
+        margin:10px;
+    }
+</style>

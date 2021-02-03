@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "SearchPlayerByC";
+}
+
+<h1>Search player by criteria</h1>
+
+
+<form action="/Search/GetPlayerByC">
+    Enter your criteria for searching:
+    <select class="form-control" name="criteriaid" required>
+        <option value="0"></option>
+        <option value="1">First/Last/Middle player name</option>
+        <option value="2">Minute for goal in match</option>
+        <option value="3">Minute for assistent in match</option>
+        <option value="4">Weight of player</option>
+        <option value="5">Height of player</option>
+        <option value="6">Name of the position</option>
+        <option value="7">Birth date of player</option>
+    </select>
+    Enter your parametar:
+    <input type="text" name="criteria" class="form-control"/>
+    Enter date if your parametar is date:
+    <input type="date" name="datee" class="form-control"/>
+    <button class="btn btn-primary mt-4">Get players</button>
+</form>

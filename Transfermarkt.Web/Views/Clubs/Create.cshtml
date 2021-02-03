@@ -1,0 +1,75 @@
+﻿@model Transfermarkt.Web.ViewModels.ClubInputVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Save" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Abbreviation" class="control-label"></label>
+                    <input asp-for="Abbreviation" class="form-control" />
+                    <span asp-validation-for="Abbreviation" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nickname" class="control-label"></label>
+                <input asp-for="Nickname" class="form-control" />
+                <span asp-validation-for="Nickname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Founded" class="control-label"></label>
+                <input asp-for="Founded" type="date" class="form-control" />
+                <span asp-validation-for="Founded" class="text-danger"></span>
+            </div>
+            <div class="form-group">Club logo</div>
+            <div class="form-group custom-file">
+                <input asp-for="Logo" class="form-control custom-file-input" accept="image/*" />
+                <label asp-for="Logo" class="custom-file-label">Choose file...</label>
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarketValue" class="control-label"></label>
+                <input asp-for="MarketValue" class="form-control" />
+                <span asp-validation-for="MarketValue" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">City</label>
+                    <select asp-for="CityId" class="form-control" asp-items="Model.Cities"></select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">League</label>
+                    <select asp-for="LeagueId" class="form-control" asp-items="Model.Leagues"></select>
+                </div>
+            </div>
+            <input asp-for="Id" type="hidden">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            @section Scripts{
+                <script>
+                    $(document).ready(function () {
+                        $(".custom-file-input").on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $('.custom-file-label').html(fileName);
+                        });
+                    });
+                </script>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,203 @@
+﻿@model Transfermarkt.Web.ViewModels.PlayerPositionsInputVM
+
+@{
+    ViewData["Title"] = "AssignPosition";
+    var counter = 0;
+}
+
+<h1>AssignPosition</h1>
+
+<h4>PlayerPosition</h4>
+<hr />
+<div style="width:100%;">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AssignPosition">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label">First name</label>
+                    <input asp-for="FirstName" class="control-label" readonly />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label">Last name</label>
+                    <input asp-for="LastName" class="control-label" readonly />
+                </div>
+                <div class="form-group">
+                    <label asp-for="PositionId" class="control-label">Positions</label>
+                    <select class="multilist" asp-items="Model.Positions" name="Ids[]" multiple="multiple"></select>
+                    @*<select size="11" class="multilist" name="Ids[]" multiple="multiple">
+                        @foreach (var item in Model.Positions)
+                        {
+                            <option id="option-@item.Value" value="@item.Value"
+                                    onclick="AddColor(@item.Text)">
+                                @item.Text
+                            </option>
+                        }
+                    </select>*@
+                </div>
+                <div>
+                    <input asp-for="PlayerId" type="hidden" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="background-image">
+        <ul id="PositionsPicture">
+            <li id="li-1" class="ItemsLi">GK</li>
+            <li id="li-2" class="ItemsLi">FB</li>
+            <li id="li-3" class="ItemsLi">CB</li>
+            <li id="li-4" class="ItemsLi">SW</li>
+            <li id="li-5" class="ItemsLi">WB</li>
+            <li id="li-6" class="ItemsLi">DM</li>
+            <li id="li-7" class="ItemsLi">CM</li>
+            <li id="li-8" class="ItemsLi">AM</li>
+            <li id="li-9" class="ItemsLi">WW</li>
+            <li id="li-10" class="ItemsLi">ST</li>
+            <li id="li-11" class="ItemsLi">FW</li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    #PositionsPicture {
+        list-style-type: none;
+    }
+
+    .ItemsLi {
+        border-radius: 50px;
+        border: 2px solid red;
+        font-size: 20px;
+        background-color: red;
+        color: white;
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+    }
+
+    #li-1 {
+        left: 5%;
+        top: 45%;
+    }
+
+    #li-2 {
+        left: 18%;
+        top: 10%;
+    }
+
+    #li-3 {
+        left: 18%;
+        top: 30%;
+    }
+
+    #li-4 {
+        left: 13%;
+        top: 55%;
+    }
+
+    #li-5 {
+        left: 20%;
+        top: 80%;
+    }
+
+    #li-6 {
+        left: 30%;
+        top: 45%;
+    }
+
+    #li-7 {
+        left: 37%;
+        top: 30%;
+    }
+
+    #li-8 {
+        left: 45%;
+        top: 40%;
+    }
+
+    #li-9 {
+        left: 45%;
+        top: 80%;
+    }
+
+    #li-10 {
+        left: 60%;
+        top: 45%;
+    }
+
+    #li-11 {
+        left: 55%;
+        top: 25%;
+    }
+
+    #background-image {
+        position: relative;
+        width: 65%;
+        height: 350px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url('https://i.pinimg.com/originals/22/c8/20/22c820b43cbb3c58223351df950af91e.jpg');
+    }
+
+    .row {
+        width: 35%;
+        display: block;
+        float: left;
+    }
+
+    select {
+        width: 200px;
+    }
+</style>
+
+<script>
+
+
+    //function AddColor(posName) {
+    //    //var d = $("#option-" + id);
+    //    var nesto = JSON.stringify(posName);
+    //    console.log(nesto);
+    //    //var itemsLi = $(".ItemsLi");
+    //    //for (var i = 0; i < itemsLi.length; i++) {
+    //    //    if (itemsLi[i].innerHTML == text) {
+    //    //        itemsLi[i].style.backgroundColor = "orange";
+    //    //        itemsLi[i].style.borderColor = "orange";
+    //    //    }
+    //    //}
+    //}
+
+    var arr = [];
+    var itemsLi = $(".ItemsLi");
+
+    setInterval(function () {
+        var selection = $(".select2-selection__choice");
+        for (var i = 0; i < arr.length; i++) {
+            var position = null;
+
+            for (var j = 0; j < selection.length; j++) {
+
+                position = selection[j].textContent.slice(-2);
+                if (arr[i] == position) {
+                    itemsLi[i].style.backgroundColor = "orange";
+                    itemsLi[i].style.borderColor = "orange";
+                }
+            }
+            if ($.inArray(position, arr) == -1) {
+                itemsLi[i].style.backgroundColor = "red";
+                itemsLi[i].style.borderColor = "red";
+            }
+        }
+    }, 1000)
+
+    $(document).ready(() => {
+        $('.multilist').select2();
+        for (var i = 0; i < itemsLi.length; i++) {
+            arr.push(itemsLi[i].innerHTML);
+        }
+    });
+</script>

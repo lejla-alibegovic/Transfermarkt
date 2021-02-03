@@ -1,0 +1,23 @@
+﻿@model Transfermarkt.Web.ViewModels.RefereeMatchAddVM
+@{
+    ViewData["Title"] = "CreateMatch";
+}
+
+<h1>Create match</h1>
+
+<form action="/Search/SaveMatch">
+    <select name="matchid" class="form-control">
+        @foreach (var x in Model.MatchList)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    <select name="refereeid" class="form-control">
+        @foreach (var x in Model.RefereeList)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

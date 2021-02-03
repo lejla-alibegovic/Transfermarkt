@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "SearchTrainer";
+}
+
+<h1>Search for trainer</h1>
+
+
+<form action="/Search/FindTrainer">
+    Enter parametar for searching(name(first or last),club name,date of birth date):
+    <input type="text" class="form-control" name="parametar" />
+    Enter date value for trainer birth date:
+    <input type="date" class="form-control" name="parametardate" />
+    <button type="submit" class="btn btn-primary mt-5">Find trainer</button>
+</form>

@@ -1,0 +1,92 @@
+﻿@model Transfermarkt.Web.ViewModels.PlayerInputVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Player</h4>
+<hr />
+<div class="row">
+    <div class="form-row">
+        <form asp-action="Save">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="FirstName" class="control-label">First name</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="MiddleName" class="control-label">Middle name</label>
+                    <input asp-for="MiddleName" class="form-control" />
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="LastName" class="control-label">Last name</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Height" class="control-label"></label>
+                    <input asp-for="Height" class="form-control" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Weight" class="control-label"></label>
+                    <input asp-for="Weight" class="form-control" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Jersey" class="control-label"></label>
+                    <input asp-for="Jersey" class="form-control" />
+                    <span asp-validation-for="Jersey" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Value" class="control-label"></label>
+                    <input asp-for="Value" class="form-control" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="StrongerFoot" class="control-label"></label>
+                <select asp-for="StrongerFoot" class="form-control" asp-items="Model.StrongerFoots"></select>
+                <span asp-validation-for="StrongerFoot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthdate" class="control-label"></label>
+                <input asp-for="Birthdate" class="form-control" />
+                <span asp-validation-for="Birthdate" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Birth place</label>
+                    <select asp-for="BirthplaceId" class="form-control" asp-items="Model.Cities"></select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Feel free to</label><br />
+                    <a class="btn btn-primary" href="/Cities/Create">Add city</a>
+                </div>
+            </div>
+            <input asp-for="Id" type="hidden">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+   
+
+
+

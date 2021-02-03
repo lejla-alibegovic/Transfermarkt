@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/qrcode.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link href="~/css/sitecss.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    @*<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/toastr.js/toastr.css" />
+    <link rel="stylesheet" href="~/lib/toastr.js/toastr.min.css" />
+
+
+    <script src="~/lib/push/push.js"></script>
+    <script src="~/lib/push/serviceWorker.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 w-100">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Transfermarkt</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item links">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Countries" asp-action="Index">Countries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Matches" asp-action="Index">Matches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Players" asp-action="Index">Players</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Referees" asp-action="Index">Referees</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Stadiums" asp-action="Index">Stadiums</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Clubs" asp-action="Index">Clubs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark links" asp-area="" asp-controller="Leagues" asp-action="Index">Leagues</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white btn btn-danger" asp-area="" asp-controller="Email" asp-action="Index">Report issue</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <script>
+
+        </script>
+    </header>
+    <div class="container-fluid">
+        @*<partial name="_CookieConsentPartial" />*@
+        <main role="main" class="pb-3 w-100 h-100">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer id="foot" class="border-top footer text-center">
+        <div class="container">
+            <span class="footertext">&copy; 2019 - Transfermarkt.Web -</span> <a class="footertext" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js"></script>
+
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/aspnet-signalr/signalr.js"></script>
+    <script src="~/lib/aspnet-signalr/signalr.min.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script>
+        $(document).ready(() => {
+            let connection = new signalR.HubConnectionBuilder().withUrl("/notifications").build();
+
+            connection.on("ReceiveMessage", (message) => {
+                toastr.options = {
+                    "timeOut": "10000",
+                    "positionClass": "toast-bottom-right",
+                    "showHideTransition": "slide",
+                }
+                toastr.info("GOOOOOOOL", message);
+            });
+
+            connection.start();
+
+            $("#Add-goal").submit(function (e) {
+                e.preventDefault();
+
+                let scorer = $("#player").html();
+                let home = $("#home").val();
+                let away = $("#away").val();
+                let message = home + " vs " + away + " Scorer" + scorer;
+                connection.invoke("Send", message).catch((err) => {
+                    return console.error(err.toString());
+                });
+
+                $(this).unbind('submit').submit();
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            var notificationHub = new signalR.HubConnectionBuilder().withUrl("/notifications").build();
+
+            notificationHub.start().then(function () {
+                console.log("Notification hub started");
+            });
+
+            notificationHub.on("ReceiveNotification", function (poruka) {
+                notificirajUtakmica(poruka);
+            });
+        });
+        function notificirajUtakmica(poruka) {
+            Push.create("Transfermarkt", {
+                body: poruka,
+                timeout: 10000,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4 class="text-danger">Report issue</h4>
+
+<form method="post" enctype="multipart/form-data" action="/Email/Index">
+    Email: <input class="form-control" type="email" name="from" />
+    Subject: <input class="form-control" type="text" name="subject" />
+    Text message: <input class="form-control" type="text" style="height:100px;" name="mess" />
+    File with message: <input class="form-control" type="file" name="filee"/>
+    <input type="submit" value="Send email" class="btn btn-success"/>
+</form>
+

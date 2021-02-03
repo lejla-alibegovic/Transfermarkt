@@ -1,0 +1,56 @@
+﻿@model Transfermarkt.Web.ViewModels.ContractInputVM
+@{
+    ViewData["Title"] = "AssignContract";
+    var message = ViewBag.Mistake;
+}
+
+<h1>AssignContract</h1>
+<h4>Player-Club Contract</h4>
+@if(message != null)
+{
+    <h1 style="color:red">@message</h1>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AssignContract">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">First name</label>
+                <input asp-for="FirstName" class="control-label" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Last name</label>
+                <input asp-for="LastName" class="control-label" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="SignedDate" class="control-label">Signed date</label>
+                <input asp-for="SignedDate" class="control-label" type="date" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpirationDate" class="control-label">Expiration date</label>
+                <input asp-for="ExpirationDate" class="control-label" type="date" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ClubId" class="control-label">Club</label>
+                <select asp-for="@Model.ClubId" asp-items="@Model.Clubs"></select>
+            </div>
+            <div>
+                <input asp-for="PlayerId" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@*@section Scripts{
+    <script>
+        $(document).ready(() => {
+            $('.multilist').select2();
+            console.log("Test");
+        });
+    </script>
+}*@

@@ -1,0 +1,86 @@
+﻿@using Transfermarkt.Web.Models;
+@using X.PagedList;
+@model IPagedList<Club>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p>
+    <a asp-action="Create" asp-controller="Clubs">Create New</a>
+</p>
+@if (!Model.Any())
+{
+    <h3>We don't have clubs in our database</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Abbreviation
+                </th>
+                <th>
+                    Nickname
+                </th>
+                <th>
+                    Founded
+                </th>
+                <th>
+                    Logo
+                </th>
+                <th>
+                    MarketValue
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var photoPath = "~/images/" + (item.Logo ?? "noimage.png");
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Abbreviation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Founded)
+                    </td>
+                    <td>
+                        <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MarketValue) €
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+@X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Clubs/Index?page={page}")
+}
+<style>
+    .pagination li {
+        height: 20px;
+        width: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+    img {
+        width: 50px;
+        height: 200px;
+    }
+</style>

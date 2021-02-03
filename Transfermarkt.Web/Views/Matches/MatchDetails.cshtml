@@ -1,0 +1,87 @@
+﻿@model Transfermarkt.Web.ViewModels.MatchDetails
+@{
+    ViewData["Title"] = "MatchDetails";
+    var HomeClub = "~/images/" + (Model.HomeClubLogo ?? "noimage.png");
+    var AwayClub = "~/images/" + (Model.AwayClubLogo ?? "noimage.png");
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h1 style="text-align:center">Match details</h1>
+
+<h2 style="text-align:center">@Model.LeagueName - @Model.StadiumName - @Model.TimePlayed.Date </h2>
+<br />
+<br />
+
+
+
+<div style="width:100%">
+    <div style="float:left;width:33%">
+        <h3>
+            @Model.HomeClub
+            <img style="height:100px;width:100px;" class="card-img-top" src="@HomeClub" asp-append-version="true" />
+        </h3>
+    </div>
+    <div style="float:left;width:33%;text-align:center;height:108px">
+        <h4>VS</h4>
+    </div>
+    <div style="float:left;width:33%">
+        <h3>
+            @Model.AwayClub
+            <img style="height:100px;width:100px;" class="card-img-top" src="@AwayClub" asp-append-version="true" />
+        </h3>
+    </div>
+</div>
+
+<div>
+    <div class="details" style="float:left;width:33%">
+        <h3> Corners </h3>
+        @foreach (var item in Model.CornersMatches)
+        {
+            <h5 id="@item.TakerId" onmouseover="ajaxCall(@item.TakerId)">
+            Corner minute: @item.Minute - Taker: @item.TakerName
+            </h5>
+        }
+    </div>
+    <div class="details" style="float:left;width:33%">
+        <h3> Fouls </h3>
+        @foreach (var item in Model.FoulsMatch)
+        {
+            var penalty = item.Penalty ? "YES" : "NO";
+            <h5 id="@item.TakerId" onmouseover="ajaxCall(@item.TakerId)">
+                Foul minute: @item.Minute - Taker: @item.TakerName<br />
+                Penalty kick: @penalty
+            </h5>
+        }
+    </div>
+    <div class="details" style="float:left;width:33%">
+        <h3> Goals </h3>
+        <h5>Goals scored on this match: @Model.GoalsScored</h5>
+        @foreach (var item in Model.GoalsMatch)
+        {
+
+            <h5 id="@item.ScorerId" onmouseover="ajaxCall(@item.ScorerId)">
+                Goal minute: @item.Minute - Scorer:  @item.ScorerName
+                <i class="fa fa-soccer-ball-o"></i>
+            </h5>
+        }
+    </div>
+</div>
+<div id="ajaxResult">
+</div>
+
+
+<script>
+    function ajaxCall(id) {
+        $.ajax({
+            type: "GET",
+            url: "/Players/Details/" + id,
+            success: function (data) {
+                $("#ajaxResult").show();
+                $("#ajaxResult").html(data);
+            }
+        });
+    }
+    function Hide() {
+        $("#ajaxResult").hide();
+    }
+</script>
+

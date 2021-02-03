@@ -1,0 +1,19 @@
+﻿@model Transfermarkt.Web.ViewModels.CreateRefereeVM
+@{
+    ViewData["Title"] = "CreateReferee";
+}
+
+<h1>Create referee</h1>
+
+<form action="/Search/SaveReferee">
+    First name: <input type="text" class="form-control" name="firstname" /><br />
+    Last name: <input type="text" class="form-control" name="lastname" /><br />
+    Middle name: <input type="text" class="form-control" name="middlename" /><br />
+    <select class="form-control" name="countryid">
+        @foreach (var x in Model.Country)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    <button class="btn btn-success">Submit</button>
+</form>

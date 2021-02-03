@@ -1,0 +1,84 @@
+﻿@using Transfermarkt.Web.ViewModels;
+@using X.PagedList;
+@model IPagedList<MatchesOutputVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<p>
+    <a class="btn btn-primary" asp-controller="Report" asp-action="Index">Generate report</a>
+</p>
+@if (!Model.Any())
+{
+    <p>We don't have matches yet!</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Time played
+                </th>
+                <th>
+                    League
+                </th>
+                <th>
+                    Stadium
+                </th>
+                <th>
+                    Home club
+                </th>
+                <th>
+                    Away club
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimePlayed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.League)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stadium)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HomeClub)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AwayClub)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.MatchId">Edit</a> |
+                        <a class="btn btn-primary" asp-action="MatchDetails" asp-route-id="@item.MatchId">Details</a> |
+                        @*<a class="btn btn-primary" asp-action="AssignReferee" asp-route-id="@item.MatchId">Assign referee</a> |*@
+                        <a class="btn btn-primary" href="/Matches/AssignFouls?id=@item.MatchId&leagueId=@item.LeagueId">Assign fouls</a> |
+                        <a class="btn btn-primary" href="/Matches/AssignCorners?id=@item.MatchId&leagueId=@item.LeagueId">Assign corners</a> |
+                        <a class="btn btn-primary" href="/Matches/AssignGoals?id=@item.MatchId&leagueId=@item.LeagueId">Assign goals</a>
+                        <a class="btn btn-primary" href="/Matches/AssignGoals?id=@item.MatchId&leagueId=@item.LeagueId">Assign goals</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Matches/Index?page={page}")
+}
+<style>
+    .pagination li {
+        height: 20px;
+        width: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+</style>

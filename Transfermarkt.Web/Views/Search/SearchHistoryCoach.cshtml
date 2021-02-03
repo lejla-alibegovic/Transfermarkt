@@ -1,0 +1,21 @@
+﻿@model Transfermarkt.Web.ViewModels.CoachHistoryVM
+
+@{
+    ViewData["Title"] = "SearchHistoryCoach";
+}
+
+
+
+<h1>Player history</h1>
+
+<form action="/Search/GetHistoryCoach">
+    Enter coach which one you want to get his history:
+    <select class="form-control" name="coachid">
+        @foreach (var x in Model.coach)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-success mt-5">Get history</button>
+</form>
+

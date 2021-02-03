@@ -1,0 +1,73 @@
+﻿@using Transfermarkt.Web.Models;
+@using X.PagedList;
+@model IPagedList<Coach>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Coaches</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@if (!Model.Any())
+{
+    <h3>We don't have coaches in our database</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    First name
+                </th>
+                <th>
+                    Middle name
+                </th>
+                <th>
+                    Last name
+                </th>
+                <th>
+                    Birthdate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MiddleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Birthdate)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="AssignClub" asp-route-id="@item.Id">Assign club</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+@X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Coaches/Index?page={page}")
+}
+<style>
+    .pagination li {
+        height: 20px;
+        width: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+</style>

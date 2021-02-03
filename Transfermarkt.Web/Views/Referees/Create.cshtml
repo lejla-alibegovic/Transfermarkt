@@ -1,0 +1,43 @@
+﻿@model Transfermarkt.Web.ViewModels.RefereeInputVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<h3>Add referee</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Save">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">First name</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label">Middle name</label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">last name</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label">Country</label>
+                <select asp-for="CountryId" class="form-control" asp-items="Model.Countries"></select>
+            </div>
+
+            <input asp-for="Id" type="hidden">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

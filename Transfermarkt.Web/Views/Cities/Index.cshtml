@@ -1,0 +1,54 @@
+﻿@using Transfermarkt.Web.Models;
+@using X.PagedList;
+@model IPagedList<City>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>City list</h1>
+
+<p>
+    <a asp-action="Create">Create new city</a>
+</p>
+@if (!Model.Any())
+{
+    <h3>We don't have cities in our database</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Postal code
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Cities/Index?page={page}")
+}
+<style>
+    .pagination li {
+        height: 20px;
+        width: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+</style>

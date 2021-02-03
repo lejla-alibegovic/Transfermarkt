@@ -1,0 +1,33 @@
+﻿@model List<Transfermarkt.Web.ViewModels.ClubDetailsVM>
+@{
+    ViewData["Title"] = "SearchClubDetails";
+}
+
+<h1>Details of all clubs</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Club name</th>
+        <th>Abbreviation</th>
+        <th>Nickname</th>
+        <th>Founded</th>
+        <th>Logo</th>
+        <th>MarketValue</th>
+        <th>City name</th>
+        <th>League name</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+    <tr>
+        <th>@x.Name</th>
+        <th>@x.Abbreviation</th>
+        <th>@x.Nickname</th>
+        <th>@x.Founded.ToShortDateString()</th>
+        <th>@x.Logo</th>
+        <th>@x.MarketValue</th>
+        <th>@x.city</th>
+        <th>@x.League</th>
+    </tr>
+    }
+</table>
+

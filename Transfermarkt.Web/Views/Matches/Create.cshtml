@@ -1,0 +1,50 @@
+﻿@model Transfermarkt.Web.ViewModels.MatchInputVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Match</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Save">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TimePlayed" class="control-label">Time played</label>
+                <input asp-for="TimePlayed" class="form-control" />
+                <span asp-validation-for="TimePlayed" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Home club</label>
+                    <select asp-for="HomeClubId" class="form-control" asp-items="Model.HomeClubs" ></select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Away club</label>
+                    <select asp-for="AwayClubId" class="form-control" asp-items="Model.AwayClubs" ></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">League</label>
+                <select asp-for="LeagueId" class ="form-control" asp-items="Model.Leagues"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Stadium</label>
+                <select asp-for="StadiumId" class ="form-control" asp-items="Model.Stadiums"></select>
+            </div>
+            <input asp-for="Id" type="hidden"/>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

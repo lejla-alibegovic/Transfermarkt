@@ -1,0 +1,36 @@
+﻿@model List<object>
+@{
+    var obj = Model;
+}
+
+<!--Table-->
+<table id="tablePreview" class="table">
+    <!--Table head-->
+    <thead>
+        <tr>
+            @foreach (var item in obj.ElementAt(0).GetType().GetProperties())
+            {
+                <td>
+                    @item.Name
+                </td>
+            }
+        </tr>
+    </thead>
+    <!--Table head-->
+    <!--Table body-->
+    <tbody>
+        @foreach (var item in obj)
+        {
+            <tr>
+                @foreach (var prop in item.GetType().GetProperties())
+                {
+                    <td>
+                        @item.GetType().GetProperty(prop.Name).GetValue(item)
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+    <!--Table body-->
+</table>
+<!--Table-->

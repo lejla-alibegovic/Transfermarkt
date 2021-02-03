@@ -1,0 +1,77 @@
+﻿@using Transfermarkt.Web.Models;
+@using X.PagedList;
+@model IPagedList<Player>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (!Model.Any())
+{
+    <h3>We don't have players in our database</h3>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    First name
+                </th>
+                <th>
+                    Middle name
+                </th>
+                <th>
+                    Last name
+                </th>
+                <th>
+                    Birthdate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MiddleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Birthdate)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a class="btn btn-primary" asp-action="DetailsPlayer" asp-route-id="@item.Id">Details</a> |
+                        <a class="btn btn-primary" asp-action="AssignPosition" asp-route-id="@item.Id">Assign position</a> |
+                        <a class="btn btn-primary" asp-action="AssignContract" asp-route-id="@item.Id">Assign contract</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Players/Index?page={page}")
+}
+
+
+<style>
+    .pagination li {
+        height: 20px;
+        width: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+</style>

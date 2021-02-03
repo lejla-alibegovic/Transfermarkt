@@ -1,0 +1,27 @@
+﻿@model  List<Transfermarkt.Web.ViewModels.SearchMatchVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Overview of the matches played and those that need to be played.</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Home club</th>
+        <th>Away club</th>
+        <th>Stadium name</th>
+        <th>Referee full name</th>
+        <th>League</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <th>@x.HomeClub</th>
+            <th>@x.AwayClub</th>
+            <th>@x.StadiumName</th>
+            <th>@x.RefereeName</th>
+            <th>@x.League</th>
+        </tr>
+    }
+</table>
+<a href="/Search/CreateMatch" class="btn btn-primary">Add new match</a><a href="/Search/CreateReferee" class="btn btn-primary ml-3">Add new referee</a>

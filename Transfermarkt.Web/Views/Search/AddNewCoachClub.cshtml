@@ -1,0 +1,24 @@
+﻿@model Transfermarkt.Web.ViewModels.CoachClubVM
+@{
+    ViewData["Title"] = "AddNewCoachClub";
+}
+
+<h1>Add new coach/club</h1>
+
+<form action="/Search/SaveNewCoachClub">
+    Select club:
+    <select name="clubid" class="form-control">
+        @foreach (var x in Model.clubs)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    Select coach:
+    <select name="coachid" class="form-control">
+        @foreach (var x in Model.coachs)
+        {
+            <option value="@x.Value">@x.Text</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-success mt-5">Save coach/club</button>
+</form>

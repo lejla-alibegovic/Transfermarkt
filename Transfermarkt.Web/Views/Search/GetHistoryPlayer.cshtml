@@ -1,0 +1,25 @@
+﻿@model Transfermarkt.Web.ViewModels.HistoryOfPlayerVM
+@{
+    ViewData["Title"] = "GetHistoryPlayer";
+    var name = Model.FullName;
+}
+
+<h1>History of @name</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Club name</th>
+        <th>Expiration date</th>
+        <th>Signed date</th>
+    </tr>
+    @foreach (var x in Model.list)
+    {
+    <tr>
+        <th>@x.ClubName</th>
+        <th>@x.ExpirationDate.ToShortDateString()</th>
+        <th>@x.SignedDate.ToShortDateString()</th>
+    </tr>
+    }
+</table>
+
+<a href="/Search/SearchHistoryPlayer" class="btn btn-danger mt-5">Back to more search</a>

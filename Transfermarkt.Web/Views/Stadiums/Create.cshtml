@@ -1,0 +1,47 @@
+﻿@model Transfermarkt.Web.ViewModels.StadiumInputVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Stadium</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Save">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateBuilt" class="control-label">Date built</label>
+                <input asp-for="DateBuilt" class="form-control" />
+                <span asp-validation-for="DateBuilt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Club</label>
+                <input asp-for="ClubName" class="form-control" readonly />
+            </div>
+            <input asp-for="LeagueId" type="hidden" />
+            <input asp-for="ClubId" type="hidden" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

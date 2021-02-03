@@ -1,0 +1,56 @@
+﻿@using Transfermarkt.Web.Models;
+@using X.PagedList;
+@model IPagedList<League>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a href="/Leagues/Create/@ViewBag.Country">Create league</a>
+</p>
+@if (!Model.Any())
+{
+    <h3>This country doesn't have any leagues</h3>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Index" asp-controller="Clubs" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                        <a asp-action="Generate" asp-route-id="@item.Id">Generate games</a> |
+                        <a asp-action="Index" asp-controller="Matches" asp-route-id="@item.Id">Match schedule</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @X.PagedList.Mvc.Core.HtmlHelper.PagedListPager(Html, Model, page => $"/Leagues/Index?page={page}")
+}
+<style>
+    .pagination li {
+        height: 20px;
+        width: 20px;
+        font-size: 30px;
+        margin: 10px;
+    }
+</style>
+

@@ -1,0 +1,15 @@
+﻿@model Transfermarkt.Web.Models.Player
+
+@{
+    var goals = ViewBag.Goals;
+    var assistant = ViewBag.Assistant;
+}
+
+<div>
+    <span><strong>First name:</strong> @Model.FirstName <strong> - Last name:</strong> @Model.LastName </span><br />
+    <span><strong>Height:</strong> @Model.Height cm - <strong>Weight:</strong> @Model.Weight kg </span><br />
+    <span><strong>Value</strong>: @Model.Value € - <strong>Strongerfoot:</strong> @Model.StrongerFoot</span><br />
+    <span><strong>Goals scored:</strong> @goals - <strong>Assists:</strong> @assistant </span>
+</div>
+
+<button id="button" class="btn btn-primary" onclick="Hide()">Hide details</button>
